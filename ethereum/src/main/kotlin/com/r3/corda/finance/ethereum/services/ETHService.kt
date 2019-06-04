@@ -8,13 +8,16 @@ import net.corda.core.serialization.SingletonSerializeAsToken
 /** Provides access to a read/write ETH client, which can make and sign payment transactions. */
 @CordaService
 class ETHService(val services: AppServiceHub) : SingletonSerializeAsToken() {
-    // Config file defaulted to this name.
+
+    // set config file name
     private val configFileName = "eth.conf"
-    val client: ETHClientForPayment by lazy {
+
+    val client: ETHClient by lazy {
         try {
-            ETHClientForPayment(configFileName)
+            ETHClient(configFileName)
         } catch (e: ConfigException) {
             throw IllegalArgumentException(e)
         }
     }
+
 }

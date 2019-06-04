@@ -43,6 +43,8 @@ dependencies {
     // Ripple library.
     compile 'com.ripple:ripple-core:0.0.1-SNAPSHOT'
 
+    compile ('org.web3j:core:4.2.0-android')
+
     // Typesafe config.
     compile 'com.typesafe:config:1.2.1'
 

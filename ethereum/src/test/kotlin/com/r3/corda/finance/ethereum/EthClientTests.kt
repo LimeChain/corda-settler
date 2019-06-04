@@ -1,17 +1,5 @@
-///*
 //package com.r3.corda.finance.ripple
-//
-//import com.r3.corda.finance.ripple.services.ReadWriteXRPClient
-//import com.r3.corda.finance.ripple.services.XRPClientForVerification
-//import com.r3.corda.finance.ripple.types.IncorrectSequenceNumberException
-//import com.r3.corda.finance.ripple.types.TransactionNotFoundException
-//import com.r3.corda.finance.ripple.utilities.XRP
-//import com.r3.corda.finance.ripple.utilities.toXRPAmount
-//import com.ripple.core.coretypes.AccountID
-//import com.ripple.core.coretypes.Amount
-//import com.ripple.core.coretypes.hash.Hash256
-//import com.ripple.core.coretypes.uint.UInt32
-//import com.ripple.core.types.known.tx.signed.SignedTransaction
+
 //import org.junit.Test
 //import java.math.BigDecimal
 //import java.net.URI
@@ -21,8 +9,33 @@
 //
 //class TestXRPClient(override val nodeUri: URI, override val secret: String, override val address: AccountID) : ReadWriteXRPClient
 //
-//class XrpClientTests {
+//import java.math.BigDecimal
+//import java.math.BigInteger
 //
+//import org.web3j.protocol.Web3j
+//import org.web3j.protocol.http.HttpService
+//import org.web3j.protocol.core.methods.response.EthGetBalance
+//import org.web3j.protocol.core.methods.response.TransactionReceipt
+//import org.web3j.protocol.core.DefaultBlockParameterName
+//
+//import org.web3j.tx.Transfer
+//import org.web3j.utils.Convert
+//
+//import org.web3j.crypto.Credentials
+//import org.web3j.crypto.WalletUtils
+//
+//import java.io.BufferedWriter
+//import java.io.File
+//import java.io.FileWriter
+
+
+//class EthClientTests {
+
+//    val password = "Lime1234Chain5678"
+//    val jsonString = "{\"version\":3,\"id\":\"ecb51768-8564-498a-bb11-3a5a5c8dc0bb\",\"address\":\"2bafc482bd227dfd5ba250521a00be3a4cc88bbd\",\"crypto\":{\"ciphertext\":\"e0511415792dfa7221ba1b8f32b8ec98e1410f45e612e2100df1aceddfdb22bd\",\"cipherparams\":{\"iv\":\"7ffa2af08f502c63d57e62440ad77539\"},\"cipher\":\"aes-128-ctr\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"salt\":\"8051a5df1c02eb3eba81d2920fbb84b76b948a1248bbba62ffff684e733948cf\",\"n\":131072,\"r\":8,\"p\":1},\"mac\":\"be23fe0e261ba38892581d80afd0c86563748377b5cc702b6ed3285a13cceff6\"}}"
+//    val recipient = "0x49DcF6C5513475e21369c02BF149d1e4CcDD09Cb"
+//    val web3j = Web3j.build(HttpService("https://ropsten.infura.io/e7a6b9997e804bc6a91b8c8d6f1fd7d1"))
+
 //    companion object {
 //        @JvmStatic
 //        private val nodeUri = URI("http://s.altnet.rippletest.net:51234")
@@ -35,16 +48,49 @@
 //        )
 //    }
 //
+//
+//    @Test
+//    fun `get account balance`() {
+//        println("=======================")
+//        println("||   CHECK BALANCE   ||")
+//        println("=======================")
+//
+//        val ethGetBalance: EthGetBalance = web3j.ethGetBalance(recipient, DefaultBlockParameterName.LATEST).sendAsync().get();
+//
+//        val weiBalance: BigInteger = ethGetBalance.getBalance()
+//        println("WEI: " + weiBalance)
+//
+//        val ethBalance: BigDecimal = Convert.fromWei(weiBalance.toString(), Convert.Unit.ETHER)
+//        println("ETHERS: " + ethBalance)
+//    }
+//
+//    @Test
+//    fun `send funds to ethereum address`() {
+//        println("=======================")
+//        println("||     SEND FUNDS    ||")
+//        println("=======================")
+//
+//        val amount: BigInteger = Convert.toWei("1", Convert.Unit.GWEI).toBigInteger()
+//        println("amount: " + amount)
+//
+//        val tempWalletFile: File = File("file.tmp")
+//        val writer: BufferedWriter = BufferedWriter(FileWriter(tempWalletFile))
+//        writer.write(jsonString)
+//        writer.close()
+//        tempWalletFile.deleteOnExit()
+//
+//        val credentials: Credentials = WalletUtils.loadCredentials(password, tempWalletFile)
+//        val transactionReceipt: TransactionReceipt = Transfer.sendFunds(web3j, credentials, recipient, BigDecimal(amount), Convert.Unit.WEI).send()
+//
+//        println("txHash: " + transactionReceipt.transactionHash)
+//    }
+//
+//
 //    @Test
 //    fun `get account info`() {
 //        val client = XRPClientForVerification(nodeUri = nodeUri)
 //        val accountId = AccountID.fromString("r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV")
 //        client.accountInfo(accountId)
-//    }
-//
-//    @Test
-//    fun `get next sequence number`() {
-//        client.nextSequenceNumber(AccountID.fromString("rNmkj4AtjEHJh3D9hMRC4rS3CXQ9mX4S4b"))
 //    }
 //
 //    private fun createAndSignTx(sequenceNumber: UInt32): SignedTransaction {

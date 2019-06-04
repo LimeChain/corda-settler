@@ -124,6 +124,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         cordapps = [
                 "$project.group:ripple:$project.version",
+                "$project.group:ethereum:$project.version",
                 "$project.group:cordapp-contracts-states:$project.version",
                 "$project.group:cordapp:$project.version",
                 "$corda_release_group:corda-finance:$corda_release_version"
@@ -139,6 +140,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         cordapps = [
                 "$project.group:ripple:$project.version",
+                "$project.group:ethereum:$project.version",
                 "$project.group:cordapp-contracts-states:$project.version",
                 "$project.group:cordapp:$project.version",
                 "$corda_release_group:corda-finance:$corda_release_version"
@@ -154,6 +156,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         cordapps = [
                 "$project.group:ripple:$project.version",
+                "$project.group:ethereum:$project.version",
                 "$project.group:cordapp-contracts-states:$project.version",
                 "$project.group:oracle:$project.version",
                 "$project.group:cordapp:$project.version",

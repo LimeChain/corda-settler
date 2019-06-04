@@ -64,7 +64,7 @@ data class DigitalCurrency(
 
     companion object {
         private val registry = mapOf(Pair("XRP", DigitalCurrency("XRP", "Ripple", 6)),
-                Pair("ETH", DigitalCurrency("ETH", "Ethereum", 18)))
+                Pair("ETH", DigitalCurrency("ETH", "Ethereum", 0)))
         fun getInstance(currencyCode: String): DigitalCurrency {
             return registry[currencyCode] ?: throw IllegalArgumentException("$currencyCode doesn't exist.")
         }
